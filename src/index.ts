@@ -60,5 +60,6 @@ class CallTracking {
 }
 
 const AtendeSimples = { CallTracking }
+window.AtendeSimples = AtendeSimples
 
 export default AtendeSimples
