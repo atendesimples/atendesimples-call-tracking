@@ -5,14 +5,36 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+
+  <style>
+    .phonenumber {
+      font-size: 2em;
+      color: indianred
+    }
+  </style>
 </head>
 <body>
   <!-- <script defer async src="https://cdn.jsdelivr.net/gh/atendesimples/call-tracking@main/pack/calltracking.min.js"></script> -->
   <script defer async src="https://eo1r2wyei3mebkt.m.pipedream.net"></script>
 
-  <script>
-    window.onload = function() {
-      const callTracking = new AtendeSimples.CallTracking({
+  <!-- <script defer>
+    var callTracking = new AtendeSimples.CallTracking({
+      token: 'UaoPcchkelsSn0BIELN89',
+      fallback: {
+        error: '1234',
+      },
+      html: {
+        event: 'load',
+        selector: '.phonenumber',
+      },
+    })
+
+    callTracking.run()
+  </script> -->
+
+  <script async defer>
+    var callbackLoad = function() {
+      var callTracking = new AtendeSimples.CallTracking({
         token: 'UaoPcchkelsSn0BIELN89',
         fallback: {
           error: '1234',
@@ -25,6 +47,11 @@
 
       callTracking.run()
     }
+    
+    var s = document.createElement('script');
+    s.setAttribute('src', "https://eo1r2wyei3mebkt.m.pipedream.net");
+    s.onload = callbackLoad;
+    document.body.appendChild(s);
   </script>
 
   <div class="phonenumber">-</div>

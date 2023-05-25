@@ -36,14 +36,21 @@ class CallTracking {
       return this.#fallback.error
     }
 
-    return fetch(url, options).then(async (response) => {
-      const data = await response.json()
+    const fn = () =>
+      fetch(url, options).then(async (response) => {
+        const data = await response.json()
 
-      // update HTML ELement
-      $el.textContent = data?.number || this.#fallback.error
+        // update HTML ELement
+        $el.textContent = data?.number || this.#fallback.error
 
-      return data?.number || this.#fallback.error
-    })
+        return data?.number || this.#fallback.error
+      })
+
+    if (this.#html.event == 'load') {
+      fn()
+    } else if (this.#html.event == 'click') {
+      $el.addEventListener('click', fn)
+    }
   }
 }
 
