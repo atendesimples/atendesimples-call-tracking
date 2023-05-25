@@ -19,7 +19,7 @@ module.exports = () => {
     optimization: { minimize: true },
     plugins,
     output: {
-      path: path.join(__dirname, './'),
+      path: path.join(__dirname, 'pack'),
       filename: 'index.[contenthash].js?[chunkhash]',
     },
     resolve: {
