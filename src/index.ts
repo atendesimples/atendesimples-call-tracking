@@ -1,6 +1,3 @@
-import * as dotenv from 'dotenv'
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
-
 import fetch from 'axios'
 
 class CallTracking {
@@ -22,7 +19,7 @@ class CallTracking {
   }
 
   run() {
-    const url = `${process.env.CALL_TRACKING_URL}/2/${this.#token}`
+    const url = `https://api.staging.atendesimples.com/call-tracking/check-in/2/${this.#token}`
 
     const options = {
       method: 'POST',

@@ -6,7 +6,7 @@ const Dotenv = require('dotenv-webpack')
 module.exports = () => {
   const plugins = [
     new Dotenv({
-      path: process.env.NODE_ENV == 'production' ? '.env' : `.env.${process.env.NODE_ENV}`,
+      path: process.env.NODE_ENV == 'production' ? '.env.production' : `.env.${process.env.NODE_ENV}`,
       allowEmptyValues: true,
       silent: false,
     }),
