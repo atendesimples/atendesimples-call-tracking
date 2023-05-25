@@ -20,7 +20,7 @@ module.exports = () => {
     plugins,
     output: {
       path: path.join(__dirname, 'pack'),
-      filename: 'ct.js?[chunkhash]',
+      filename: 'ct.min.js?[chunkhash]',
     },
     resolve: {
       fallback: { os: false, path: false, fs: false },
