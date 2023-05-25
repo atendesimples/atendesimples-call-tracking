@@ -32,7 +32,6 @@ class CallTracking {
     let $el = document.querySelector(this.#html.selector)
 
     if (!$el) {
-      console.info('[CallTracking] Campo HTML não encontrado')
       return this.#fallback.error
     }
 
