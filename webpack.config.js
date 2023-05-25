@@ -10,9 +10,6 @@ module.exports = () => {
       allowEmptyValues: true,
       silent: false,
     }),
-    new webpack.ProvidePlugin({
-      node_env: process.env.NODE_ENV,
-    }),
   ]
 
   return {
@@ -22,8 +19,8 @@ module.exports = () => {
     optimization: { minimize: true },
     plugins,
     output: {
-      path: path.join(__dirname, 'dist'),
-      filename: '[name].min.js?[chunkhash]',
+      path: path.join(__dirname, 'pack'),
+      filename: 'calltracking.min.js?[chunkhash]',
     },
     resolve: {
       fallback: { os: false, path: false, fs: false },

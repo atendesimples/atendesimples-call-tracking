@@ -19,7 +19,7 @@ class CallTracking {
   }
 
   run() {
-    const url = `https://api.staging.atendesimples.com/call-tracking/check-in/2/${this.#token}`
+    const url = `${process.env.CALL_TRACKING_URL}/2/${this.#token}`
 
     const options = {
       method: 'POST',
