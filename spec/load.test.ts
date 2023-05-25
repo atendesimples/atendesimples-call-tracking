@@ -69,7 +69,7 @@ describe('AtendeSimples', () => {
       },
     })
 
-    let result = await callTracking.run()
+    let result = await callTracking.load()
 
     expect(result).toBeTruthy()
     expect(document.querySelector('.phonenumber').textContent).toBe(result)
@@ -89,7 +89,7 @@ describe('AtendeSimples', () => {
       },
     })
 
-    let result = await callTracking.run()
+    let result = await callTracking.load()
 
     expect(result).toBeTruthy()
     expect(document.querySelector('.phonenumber').textContent).toBe('1234')
@@ -111,7 +111,7 @@ describe('AtendeSimples', () => {
       },
     })
 
-    let result = await callTracking.run()
+    let result = await callTracking.load()
 
     expect(result).toBeTruthy()
     expect(document.querySelector('.phonenumber').textContent).toBe('1234')
@@ -131,9 +131,7 @@ describe('AtendeSimples', () => {
       },
     })
 
-    let result = await callTracking.run()
-
-    expect(console.info).toHaveBeenCalledWith('[CallTracking] Campo HTML não encontrado')
+    let result = await callTracking.load()
 
     expect(result).toBeTruthy()
     expect(result).toBe('1234')

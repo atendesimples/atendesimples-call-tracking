@@ -18,7 +18,7 @@ class CallTracking {
     return ga.split('.').slice(-2).join('.')
   }
 
-  load() {
+  request() {
     const url = `${process.env.CALL_TRACKING_URL}/2/${this.#token}`
 
     const options = {
@@ -29,34 +29,39 @@ class CallTracking {
       },
     }
 
+    return fetch(url, options).then(async (response) => {
+      const data = await response.json()
+
+      // update HTML ELement
+      let $el = document.querySelector(this.#html.selector)
+      $el.textContent = data?.number || this.#fallback.error
+
+      return data?.number || this.#fallback.error
+    })
+  }
+
+  load() {
     let $el = document.querySelector(this.#html.selector)
 
     if (!$el) {
       return this.#fallback.error
     }
 
-    const checkinRequest = () => {
-      return fetch(url, options).then(async (response) => {
-        const data = await response.json()
-
-        // update HTML ELement
-        $el.textContent = data?.number || this.#fallback.error
-
-        return data?.number || this.#fallback.error
-      })
-    }
-
     if (this.#html.event == 'load') {
-      checkinRequest()
+      return this.request()
     } else if (this.#html.event == 'click') {
       $el.addEventListener('click', async () => {
-        if (this.#html.loading) {
-          $el.innerHTML = (await this.#html.loading()) || '...'
-        } else {
-          $el.textContent = '...'
-        }
+        // if (this.#html.loading) {
+        //   $el.innerHTML = (await this.#html.loading()) || '...'
+        // } else {
+        // $el.textContent = '...'
+        // }
 
-        checkinRequest()
+        let result = await this.request()
+
+        $el.textContent = result
+
+        return result
       })
     }
   }
