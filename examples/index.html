@@ -19,33 +19,24 @@
   </style>
 </head>
 <body>
-  <!-- <script defer async src="https://cdn.jsdelivr.net/gh/atendesimples/call-tracking@main/pack/calltracking.min.js"></script> -->
-  <!-- <script defer async src="https://eo1r2wyei3mebkt.m.pipedream.net"></script> -->
+  <script defer async src="https://eo1r2wyei3mebkt.m.pipedream.net"></script>
 
-  <!-- <script defer>
-    var callTracking = new AtendeSimples.CallTracking({
-      token: 'UaoPcchkelsSn0BIELN89',
-      fallback: {
-        error: '1234',
-      },
-      html: {
-        event: 'load',
-        selector: '.phonenumber',
-      },
-    })
-
-    callTracking.run()
+  <!-- <script defer async>
+    var s = document.createElement('script');
+    s.setAttribute('src', "https://eo1r2wyei3mebkt.m.pipedream.net");
+    s.onload = callback;
+    document.body.appendChild(s);
   </script> -->
 
   <script async defer>
-    var callback = function() {
+    var ctLoad = function() {
       var callTracking = new AtendeSimples.CallTracking({
         token: 'UaoPcchkelsSn0BIELN89',
         fallback: {
           error: '080001881283',
         },
         html: {
-          event: 'click',
+          event: 'load',
           selector: '.phonenumber',
           loading: async () => {
             return ''
@@ -55,15 +46,10 @@
 
       callTracking.load()
     }
-    
-    var s = document.createElement('script');
-    s.setAttribute('src', "https://eo1r2wyei3mebkt.m.pipedream.net");
-    // s.setAttribute('src', "https://cdn.jsdelivr.net/gh/atendesimples/call-tracking@v1.0.13/pack/ct.min.js");
-    // s.setAttribute('src', "https://cdn.statically.io/gh/atendesimples/call-tracking/main/pack/ct.js");
-    s.onload = callback;
-    document.body.appendChild(s);
+
+    window.onload = ctLoad
   </script>
 
-  <div class="phonenumber">Click para ver o número</div>
+  <div class="phonenumber">-</div>
 </body>
 </html> 
