@@ -3,15 +3,6 @@ dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
 
 import fetch from 'axios'
 
-type CallTrackingProps = {
-  token: string
-  fallback?: any
-  html: {
-    event: string
-    selector: string
-  }
-}
-
 class CallTracking {
   #token: any
   #fallback: any

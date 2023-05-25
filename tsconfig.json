@@ -8,7 +8,7 @@
 
     "baseUrl": ".",
 
-    "types": ["node"],
+    "types": ["node", "./src/"],
 
     "paths": {
       "@/*": ["./src/*"]

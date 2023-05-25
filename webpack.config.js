@@ -17,17 +17,13 @@ module.exports = () => {
 
   return {
     entry: [path.join(__dirname, 'src/index.ts')],
-    target: 'web',
     mode: 'production',
+    devtool: 'source-map',
     optimization: { minimize: true },
-    performance: {
-      hints: false,
-    },
     plugins,
     output: {
-      libraryTarget: 'commonjs2',
       path: path.join(__dirname, 'dist'),
-      filename: '[name].js',
+      filename: '[name].min.js?[chunkhash]',
     },
     resolve: {
       fallback: { os: false, path: false, fs: false },
