@@ -15,12 +15,12 @@ module.exports = () => {
   return {
     entry: [path.join(__dirname, 'src/index.ts')],
     mode: 'production',
-    devtool: 'source-map',
+    // devtool: 'source-map',
     optimization: { minimize: true },
     plugins,
     output: {
-      path: path.join(__dirname, 'pack'),
-      filename: 'ct.js?[chunkhash]',
+      path: path.join(__dirname, './'),
+      filename: 'index.[contenthash].js?[chunkhash]',
     },
     resolve: {
       fallback: { os: false, path: false, fs: false },
