@@ -1,4 +1,4 @@
-import fetch from 'axios'
+import 'unfetch/polyfill'
 
 class CallTracking {
   #token: any
@@ -36,8 +36,8 @@ class CallTracking {
       return this.#fallback.error
     }
 
-    return fetch(url, options).then((response) => {
-      const { data } = response
+    return fetch(url, options).then(async (response) => {
+      const data = await response.json()
 
       // update HTML ELement
       $el.textContent = data?.number || this.#fallback.error

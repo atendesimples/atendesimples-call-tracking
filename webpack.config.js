@@ -20,7 +20,7 @@ module.exports = () => {
     plugins,
     output: {
       path: path.join(__dirname, 'pack'),
-      filename: 'calltracking.min.js?[chunkhash]',
+      filename: 'ct.js?[chunkhash]',
     },
     resolve: {
       fallback: { os: false, path: false, fs: false },
@@ -35,7 +35,7 @@ module.exports = () => {
           loader: 'esbuild-loader',
           options: {
             loader: 'ts',
-            target: 'node18',
+            target: ['es2015'],
           },
         },
       ],
