@@ -15,7 +15,7 @@ module.exports = () => {
   return {
     entry: [path.join(__dirname, 'src/index.ts')],
     mode: 'production',
-    devtool: 'source-map',
+    // devtool: 'source-map',
     optimization: { minimize: true },
     plugins,
     output: {
