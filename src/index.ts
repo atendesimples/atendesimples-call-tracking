@@ -18,7 +18,7 @@ class CallTracking {
     return ga.split('.').slice(-2).join('.')
   }
 
-  run() {
+  load() {
     const url = `${process.env.CALL_TRACKING_URL}/2/${this.#token}`
 
     const options = {
@@ -36,8 +36,8 @@ class CallTracking {
       return this.#fallback.error
     }
 
-    const fn = () =>
-      fetch(url, options).then(async (response) => {
+    const checkinRequest = () => {
+      return fetch(url, options).then(async (response) => {
         const data = await response.json()
 
         // update HTML ELement
@@ -45,11 +45,12 @@ class CallTracking {
 
         return data?.number || this.#fallback.error
       })
+    }
 
     if (this.#html.event == 'load') {
-      fn()
+      checkinRequest()
     } else if (this.#html.event == 'click') {
-      $el.addEventListener('click', fn)
+      $el.addEventListener('click', checkinRequest)
     }
   }
 }

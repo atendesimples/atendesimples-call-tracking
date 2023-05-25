@@ -9,7 +9,12 @@
   <style>
     .phonenumber {
       font-size: 2em;
-      color: indianred
+      background: #000;
+      border-radius: 5px;
+      padding: 10px;
+      width: auto;
+      display: inline-flex;
+      color: indianred;
     }
   </style>
 </head>
@@ -42,19 +47,20 @@
         html: {
           event: 'click',
           selector: '.phonenumber',
+          loading: 'carregando...'
         },
       })
 
-      callTracking.run()
+      callTracking.load()
     }
     
     var s = document.createElement('script');
     // s.setAttribute('src', "https://eo1r2wyei3mebkt.m.pipedream.net");
-    s.setAttribute('src', "https://cdn.jsdelivr.net/gh/atendesimples/call-tracking@main/pack/ct.js");
+    s.setAttribute('src', "https://cdn.jsdelivr.net/gh/atendesimples/call-tracking@v1.0/pack/ct.js");
     s.onload = callback;
     document.body.appendChild(s);
   </script>
 
-  <div class="phonenumber">-</div>
+  <div class="phonenumber">Click para ver o número</div>
 </body>
 </html>
