@@ -50,7 +50,15 @@ class CallTracking {
     if (this.#html.event == 'load') {
       checkinRequest()
     } else if (this.#html.event == 'click') {
-      $el.addEventListener('click', checkinRequest)
+      $el.addEventListener('click', async () => {
+        if (this.#html.loading) {
+          await this.#html.loading()
+        } else {
+          $el.textContent = 'carregando...'
+        }
+
+        checkinRequest()
+      })
     }
   }
 }
