@@ -53,7 +53,7 @@ class CallTracking {
         if (this.#html.loading) {
           $el.innerHTML = (await this.#html.loading()) || '...'
         } else {
-          $el.textContent = 'carregando...'
+          $el.textContent = '...'
         }
 
         checkinRequest()
