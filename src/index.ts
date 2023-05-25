@@ -52,7 +52,7 @@ class CallTracking {
     } else if (this.#html.event == 'click') {
       $el.addEventListener('click', async () => {
         if (this.#html.loading) {
-          $el.textContent = await this.#html.loading()
+          $el.innerHTML = await this.#html.loading()
         } else {
           $el.textContent = 'carregando...'
         }
