@@ -27,7 +27,7 @@ describe('AtendeSimples', () => {
     it('should return a string', () => {
       document.cookie = '_ga=GA1.1.553524416.1685026105;OptanonAlertBoxClosed=2023-02-01T15:12:04.164Z'
 
-      const callTracking = new AtendeSimples.CallTracking({
+      let callTracking = new AtendeSimples.CallTracking({
         token: 'UaoPcchkelsSn0BIELN89',
         html: {
           event: 'load',
@@ -60,6 +60,9 @@ describe('AtendeSimples', () => {
 
     const callTracking = new AtendeSimples.CallTracking({
       token: 'UaoPcchkelsSn0BIELN89',
+      fallback: {
+        error: '1234',
+      },
       html: {
         event: 'load',
         selector: '.phonenumber',
