@@ -1,67 +1,73 @@
 import 'unfetch/polyfill'
 
+import Document from '@/Document'
+import Checkin from '@/Checkin'
+import Marketing from '@/Marketing'
+import * as Page from '@/Page'
+
 class CallTracking {
   #token: any
   #fallback: any
   #html: any
+  utm: UTM
 
   constructor(props: CallTrackingProps) {
     this.#token = props.token
     this.#fallback = props.fallback
     this.#html = props.html
+
+    this.utmAnalyzer()
   }
 
-  googleClientId() {
-    let ga = document.cookie.split(';').find((o) => o.match(/_ga=(.+?)/))
-    if (!ga) return ''
-
-    return ga.split('.').slice(-2).join('.')
+  utmAnalyzer() {
+    let analytics = Marketing.Analytics.call()
+    this.utm = { ...analytics.fixed.attributes, ...analytics.latest.attributes } as UTM
   }
 
-  request() {
-    const url = `${process.env.CALL_TRACKING_URL}/2/${this.#token}`
+  async checkin() {
+    try {
+      const data = await Checkin.call({
+        token: this.#token,
+        data: {
+          utm: this.utm,
+          page_cid: Page.googleClientId(),
+          page_referrer: Page.referrer(),
+          visitor_id: this.utm.fingerprint,
+          visitor_user_agent: Page.userAgent(),
+          date: new Date().toISOString(),
+        },
+      })
 
-    const options = {
-      method: 'POST',
-      data: JSON.stringify({ cid: this.googleClientId() }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      return data.number
+    } catch (error) {
+      console.error(error)
+      return this.#fallback.error
     }
-
-    return fetch(url, options).then(async (response) => {
-      const data = await response.json()
-
-      // update HTML ELement
-      let $el = document.querySelector(this.#html.selector)
-      $el.textContent = data?.number || this.#fallback.error
-
-      return data?.number || this.#fallback.error
-    })
   }
 
-  load() {
-    let $el = document.querySelector(this.#html.selector)
+  async cretePhoneNumber() {
+    let number = await this.checkin()
+    return number || this.#fallback.error
+  }
+
+  async load() {
+    let $el = Document.get(this.#html.selector)
 
     if (!$el) {
       return this.#fallback.error
     }
 
     if (this.#html.event == 'load') {
-      return this.request()
+      let number = await this.cretePhoneNumber()
+      Document.updateValue(this.#html.selector, number)
+
+      return number
     } else if (this.#html.event == 'click') {
       $el.addEventListener('click', async () => {
-        // if (this.#html.loading) {
-        //   $el.innerHTML = (await this.#html.loading()) || '...'
-        // } else {
-        // $el.textContent = '...'
-        // }
+        let number = await this.cretePhoneNumber()
+        Document.updateValue(this.#html.selector, number)
 
-        let result = await this.request()
-
-        $el.textContent = result
-
-        return result
+        return number
       })
     }
   }

@@ -7,29 +7,26 @@
   <title>Document</title>
 
   <style>
-    .phonenumber {
-      font-size: 2em;
-      background: #000;
+    .border {
+      border: 1px solid rgb(120, 53, 103, .4);
       border-radius: 5px;
       padding: 10px;
       width: auto;
       display: inline-flex;
-      color: indianred;
+      align-items: center;
+      font-size: 2em;
+      background: rgb(120, 53, 103, 1);
+      color: white;
+    }
+
+    .phonenumber {
+      padding-left: 5px;
     }
   </style>
 </head>
 <body>
-  <script defer async src="https://eo1r2wyei3mebkt.m.pipedream.net"></script>
-
-  <!-- <script defer async>
-    var s = document.createElement('script');
-    s.setAttribute('src', "https://eo1r2wyei3mebkt.m.pipedream.net");
-    s.onload = callback;
-    document.body.appendChild(s);
-  </script> -->
-
-  <script async defer>
-    var ctLoad = function() {
+  <script defer async>
+    var callback = function() {
       var callTracking = new AtendeSimples.CallTracking({
         token: 'UaoPcchkelsSn0BIELN89',
         fallback: {
@@ -38,18 +35,21 @@
         html: {
           event: 'load',
           selector: '.phonenumber',
-          loading: async () => {
-            return ''
-          }
         },
       })
 
       callTracking.load()
     }
 
-    window.onload = ctLoad
+    var s = document.createElement('script');
+    s.setAttribute('src', "https://eo1r2wyei3mebkt.m.pipedream.net");
+    s.onload = callback;
+    document.body.appendChild(s);
   </script>
 
-  <div class="phonenumber">-</div>
+  <div class="border">
+    <span>Telefone: </span>
+    <span class="phonenumber"></span>
+  </div>
 </body>
 </html> 

@@ -1,8 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 
 import AtendeSimples from '@/index'
-
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+import { allow, delay } from './utils'
 
 console.info = vi.fn()
 
@@ -12,12 +11,6 @@ function createDiv() {
   div.innerHTML = ''
 
   document.body.appendChild(div)
-}
-
-function clearAllCookie() {
-  document.cookie.split(';').forEach(function (c) {
-    document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/')
-  })
 }
 
 describe('AtendeSimples', () => {
@@ -45,7 +38,7 @@ describe('AtendeSimples', () => {
 
     let $el = document.querySelector('.phonenumber')
 
-    let callTrackingRequestSpy = vi.spyOn(callTracking, 'request').mockResolvedValue('12345678')
+    let callTrackingRequestSpy = allow(callTracking).receive('checkin').returns('12345678')
 
     var event = new MouseEvent('click')
     $el.dispatchEvent(event)

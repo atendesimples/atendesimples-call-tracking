@@ -7,6 +7,7 @@ dotenv.config()
 export default defineConfig({
   test: {
     environment: 'jsdom',
+    setupFiles: ['./setupTests.ts'],
   },
   plugins: [tsconfigPaths()],
 })

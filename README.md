@@ -1,0 +1,19 @@
+- Dados Acesso
+		- IP
+		- JS Fallbacks
+
+	- Primeiro acesso e último acesso:
+		- UUID Visitor
+		- Data e hora
+		- Referrer
+		- CID
+		- UA
+		- URL
+		- Querystring
+		- UTM
+			- Medium
+			- Source
+			- Campaign
+			- Campaign id
+			- Terms
+			- Content
