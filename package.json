@@ -1,7 +1,7 @@
 {
   "name": "@atendesimples/call-tracking",
   "description": "A simple and lightweight library to use call tracking feature by Atende Simples",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "author": "Thadeu Esteves<tadeuu@gmail.com>",
   "license": "MIT",
   "source": "src/index.ts",
