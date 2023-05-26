@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import QueryStringSession from './QueryStringSession'
 import Context from './Context'
 
-import { getSessionOrParameter, googleClientId, locationPath, parameterOrDefault, queryStringText, referrer } from '@/Page'
+import { getSessionOrParameter, getStorageOrDefault, googleClientId, locationPath, parameterOrDefault, queryStringText, referrer } from '@/Page'
 
 export default class Analytics {
   static createSessionByQueryString() {
@@ -33,7 +33,7 @@ export default class Analytics {
       querystring: queryStringText(),
       cid: googleClientId(),
       date: new Date().toISOString(),
-      fingerprint: uuidv4(),
+      fingerprint: getStorageOrDefault('fingerprint', uuidv4()),
     })
 
     let attributes = context.first()

@@ -14,6 +14,12 @@ export function getSessionOrParameter(name) {
   return null
 }
 
+export function getStorageOrDefault(name, defaultValue = '') {
+  if (localStorage.getItem(name)) return localStorage.getItem(name)
+
+  return defaultValue
+}
+
 export function parameterOrDefault(name, defaultValue = 'no_utm') {
   if (getSessionOrParameter(name)) return getSessionOrParameter(name)
 

@@ -3,13 +3,10 @@ export type CheckinResult = {
   number: string
 }
 
-type CheckinData = {
+type CheckinData = UTM & {
   visitor_id: string
   visitor_user_agent: string
   date: string
-  page_cid: string
-  page_referrer: string
-  utm: UTM
 }
 
 type CheckinProps = {

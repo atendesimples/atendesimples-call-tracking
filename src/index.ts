@@ -9,7 +9,11 @@ class CallTracking {
   #token: any
   #fallback: any
   #html: any
-  utm: UTM
+  #hasClicked: any
+
+  __utm: UTM
+  __checkin: any
+  __loading: boolean
 
   constructor(props: CallTrackingProps) {
     this.#token = props.token
@@ -21,27 +25,29 @@ class CallTracking {
 
   utmAnalyzer() {
     let analytics = Marketing.Analytics.call()
-    this.utm = { ...analytics.fixed.attributes, ...analytics.latest.attributes } as UTM
+    this.__utm = { ...analytics.fixed.attributes, ...analytics.latest.attributes } as UTM
   }
 
   async checkin() {
+    this.__loading = true
+
     try {
-      const data = await Checkin.call({
+      this.__checkin = await Checkin.call({
         token: this.#token,
         data: {
-          utm: this.utm,
-          page_cid: Page.googleClientId(),
-          page_referrer: Page.referrer(),
-          visitor_id: this.utm.fingerprint,
+          ...this.__utm,
+          visitor_id: this.__utm.fingerprint,
           visitor_user_agent: Page.userAgent(),
           date: new Date().toISOString(),
         },
       })
 
-      return data.number
+      return this.__checkin.number
     } catch (error) {
       console.error(error)
       return this.#fallback.error
+    } finally {
+      this.__loading = false
     }
   }
 
@@ -51,6 +57,12 @@ class CallTracking {
   }
 
   async load() {
+    if (this.__checkin?.number) {
+      console.log('Already checkin before')
+      Document.updateValue(this.#html.selector, this.__checkin.number)
+      return this.__checkin.number
+    }
+
     let $el = Document.get(this.#html.selector)
 
     if (!$el) {
@@ -58,13 +70,19 @@ class CallTracking {
     }
 
     if (this.#html.event == 'load') {
-      let number = await this.cretePhoneNumber()
-      Document.updateValue(this.#html.selector, number)
+      if (!this.__loading) {
+        let number = await this.cretePhoneNumber()
+        Document.updateValue(this.#html.selector, number)
 
-      return number
+        return number
+      }
     } else if (this.#html.event == 'click') {
       $el.addEventListener('click', async () => {
+        if (this.#hasClicked || this.__loading) return undefined
+
         let number = await this.cretePhoneNumber()
+        this.#hasClicked = true
+
         Document.updateValue(this.#html.selector, number)
 
         return number
