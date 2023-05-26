@@ -35,9 +35,10 @@ class CallTracking {
       this.__checkin = await Checkin.call({
         token: this.#token,
         data: {
-          ...this.__utm,
+          utm: this.__utm,
           visitor_id: this.__utm.fingerprint,
           visitor_user_agent: Page.userAgent(),
+          cid: Page.googleClientId(),
           date: new Date().toISOString(),
         },
       })
@@ -51,9 +52,18 @@ class CallTracking {
     }
   }
 
-  async cretePhoneNumber() {
+  async createPhoneNumber() {
+    let phoneBySession = localStorage.getItem('calltracking:phonenumber')
+
+    if (phoneBySession) {
+      return phoneBySession
+    }
+
     let number = await this.checkin()
-    return number || this.#fallback.error
+    let result = number || this.#fallback.error
+    localStorage.setItem('calltracking:phonenumber', result)
+
+    return result
   }
 
   async load() {
@@ -71,7 +81,7 @@ class CallTracking {
 
     if (this.#html.event == 'load') {
       if (!this.__loading) {
-        let number = await this.cretePhoneNumber()
+        let number = await this.createPhoneNumber()
         Document.updateValue(this.#html.selector, number)
 
         return number
@@ -80,7 +90,7 @@ class CallTracking {
       $el.addEventListener('click', async () => {
         if (this.#hasClicked || this.__loading) return undefined
 
-        let number = await this.cretePhoneNumber()
+        let number = await this.createPhoneNumber()
         this.#hasClicked = true
 
         Document.updateValue(this.#html.selector, number)

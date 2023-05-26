@@ -58,3 +58,7 @@ export function Location(href: string) {
 export function clearSessionStorage() {
   window.sessionStorage.clear()
 }
+
+export function clearLocalStorage() {
+  window.localStorage.clear()
+}
