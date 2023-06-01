@@ -202,4 +202,4 @@ class CallTrackingComponent extends HTMLElement {
   }
 }
 
-window.customElements.define('calltracking', CallTrackingComponent)
+window.customElements.define('call-tracking', CallTrackingComponent)
