@@ -9,10 +9,9 @@ import Checkout from '@/Checkout'
 import Ping from '@/Ping'
 import Marketing from '@/Marketing'
 import * as Page from '@/Page'
+import { delay } from '@/Utils'
 
-const delay = (ms) => new Promise((resolve, reject) => setTimeout(resolve, ms))
-
-class CallTrackingNumber extends HTMLElement {
+class CallTrackingComponent extends HTMLElement {
   number: string
   checkin: Checkin
   shadow: ShadowRoot
@@ -203,4 +202,4 @@ class CallTrackingNumber extends HTMLElement {
   }
 }
 
-window.customElements.define('ct-number', CallTrackingNumber)
+window.customElements.define('calltracking', CallTrackingComponent)

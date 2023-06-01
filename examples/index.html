@@ -5,59 +5,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Call Tracking</title>
-
-  <style>
-    .obabox-campaign {
-      border: 1px solid rgb(120, 53, 103, .4);
-      border-radius: 5px;
-      padding: 10px;
-      width: auto;
-      display: inline-flex;
-      align-items: center;
-      font-size: 2em;
-      background: rgb(120, 53, 103, 1);
-      color: white;
-    }
-  </style>
 </head>
 <body>
   <script defer async>
-    var callback = function() {
-      // var callTracking = new AtendeSimples.CallTracking({
-      //   token: 'UaoPcchkelsSn0BIELN89',
-      //   fallback: {
-      //     error: '080001881283',
-      //   },
-      //   html: {
-      //     event: 'load',
-      //     selector: '.phonenumber',
-      //   },
-      // })
-
-      // callTracking.load()
-    }
-
-    var s = document.createElement('script');
-    s.setAttribute('src', "https://eo1r2wyei3mebkt.m.pipedream.net");
-    // s.setAttribute('src', "../pack/ct.min.js");
-    s.onload = callback;
-    document.body.appendChild(s);
+    // var s=document.createElement("script");s.setAttribute("src","https://eo1r2wyei3mebkt.m.pipedream.net");document.body.appendChild(s);
+    var s=document.createElement("script");s.setAttribute("src","https://bit.ct.staging.on.us-east-1.ascloud.link/cdn/");document.body.appendChild(s);
+    // var s=document.createElement("script");s.setAttribute("src","../pack/ct.min.js");document.body.appendChild(s);
   </script>
     
-  <div>
-    <ct-number class="obabox-campaign" token="UaoPcchkelsSn0BIELN89" fallback-error="080001881283" event-type="load" />
-  </div>
-  
-  <div>
-    <ct-number class="obabox-campaign" token="UaoPcchkelsSn0BIELN89" fallback-error="080001881283" event-type="click" />
-  </div>
-  
-  <div>
-    <ct-number class="obabox-campaign" token="UaoPcchkelsSn0BIELN89" fallback-error="080001881283" event-type="load" />
-  </div>
-  
-  <div>
-    <ct-number class="obabox-campaign" token="UaoPcchkelsSn0BIELN89" fallback-error="080001881283" event-type="click" />
+  <div style="display: flex; justify-content: center; align-items: center; height: 100svh; margin-top: -50px">
+    <div>
+      Central de Atendimento:
+      <calltracking token="UaoPcchkelsSn0BIELN89" fallback-error="080001881283" event-type="load" />
+    </div>
   </div>
 </body>
 </html> 
