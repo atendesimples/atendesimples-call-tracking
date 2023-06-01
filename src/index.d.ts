@@ -3,6 +3,10 @@ export {}
 declare global {
   var $: any
 
+  interface HTMLHeadElement extends HTMLHeadElement {
+    createShadowRoot: any
+  }
+
   type CallTrackingProps = {
     token: string
     fallback?: any

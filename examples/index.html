@@ -7,7 +7,7 @@
   <title>Call Tracking</title>
 
   <style>
-    .border {
+    .obabox-campaign {
       border: 1px solid rgb(120, 53, 103, .4);
       border-radius: 5px;
       padding: 10px;
@@ -18,28 +18,23 @@
       background: rgb(120, 53, 103, 1);
       color: white;
     }
-
-    .phonenumber {
-      padding-left: 5px;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
   <script defer async>
     var callback = function() {
-      var callTracking = new AtendeSimples.CallTracking({
-        token: 'UaoPcchkelsSn0BIELN89',
-        fallback: {
-          error: '080001881283',
-        },
-        html: {
-          event: 'load',
-          selector: '.phonenumber',
-        },
-      })
+      // var callTracking = new AtendeSimples.CallTracking({
+      //   token: 'UaoPcchkelsSn0BIELN89',
+      //   fallback: {
+      //     error: '080001881283',
+      //   },
+      //   html: {
+      //     event: 'load',
+      //     selector: '.phonenumber',
+      //   },
+      // })
 
-      callTracking.load()
+      // callTracking.load()
     }
 
     var s = document.createElement('script');
@@ -48,10 +43,21 @@
     s.onload = callback;
     document.body.appendChild(s);
   </script>
-
-  <div class="border">
-    <span>Telefone: </span>
-    <span class="phonenumber">Click pra ver o número</span>
+    
+  <div>
+    <ct-number class="obabox-campaign" token="UaoPcchkelsSn0BIELN89" fallback-error="080001881283" event-type="load" />
+  </div>
+  
+  <div>
+    <ct-number class="obabox-campaign" token="UaoPcchkelsSn0BIELN89" fallback-error="080001881283" event-type="click" />
+  </div>
+  
+  <div>
+    <ct-number class="obabox-campaign" token="UaoPcchkelsSn0BIELN89" fallback-error="080001881283" event-type="load" />
+  </div>
+  
+  <div>
+    <ct-number class="obabox-campaign" token="UaoPcchkelsSn0BIELN89" fallback-error="080001881283" event-type="click" />
   </div>
 </body>
 </html> 
