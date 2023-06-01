@@ -1,5 +1,5 @@
 // Do this import before any code that manipulates the DOM.
-import '@webcomponents/custom-elements'
+// import '@webcomponents/custom-elements'
 
 // Do this create polyfill to fetch global function
 import 'unfetch/polyfill'
@@ -9,7 +9,6 @@ import Checkout from '@/Checkout'
 import Ping from '@/Ping'
 import Marketing from '@/Marketing'
 import * as Page from '@/Page'
-import { delay } from '@/Utils'
 
 class CallTrackingComponent extends HTMLElement {
   number: string
@@ -23,10 +22,6 @@ class CallTrackingComponent extends HTMLElement {
   checkinSendProps: any
   elementRef: HTMLElement
   pingTimer: any
-
-  static get observedAttributes() {
-    return ['token', 'fallback-error', 'event-type']
-  }
 
   constructor() {
     super()
@@ -196,8 +191,6 @@ class CallTrackingComponent extends HTMLElement {
   }
 
   async disconnectedCallback() {
-    console.log('CallTracking element removed from page.')
-
     await this.notifyCallTrackingCheckout()
   }
 }
