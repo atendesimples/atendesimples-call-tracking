@@ -23,8 +23,8 @@
     "build:prod": "rm -rf pack && cross-env NODE_ENV=production npx webpack --config webpack.config.js",
     "git-tag": "git tag v$npm_package_version",
     "git-push": "git push origin HEAD && git push --tags",
-    "release:staging": "npm run -s build:staging -s && npm run -s git-tag && npm run -s git-push",
-    "release:prod": "npm run -s build:prod -s && npm run -s git-tag && npm run -s git-push"
+    "release:staging": "npm run -s build:staging -s && npm run -s git-push",
+    "release:prod": "npm run -s build:prod -s && npm run -s git-push"
   },
   "devDependencies": {
     "@types/jsdom": "^21.1.1",
