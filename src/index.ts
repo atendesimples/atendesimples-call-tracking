@@ -49,7 +49,7 @@ class CallTrackingComponent extends HTMLElement {
       utm: this.utm,
       visitor_id: this.visitorID,
       visitor_user_agent: Page.userAgent(),
-      cid: '1126284224.1633708690', // Page.googleClientId(),
+      cid: Page.googleClientId(), // '1126284224.1633708690'
       date: new Date().toISOString(),
     }
 
