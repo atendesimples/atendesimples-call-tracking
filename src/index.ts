@@ -113,17 +113,19 @@ class CallTrackingComponent extends HTMLElement {
     this.elementRef.textContent = this.checkin.result.number
     retryCount = 0
 
-    this.pingTimer = setInterval(async () => {
-      let pong = await this.pingPong()
+    if (this.checkin.result.type == 'pool') {
+      this.pingTimer = setInterval(async () => {
+        let pong = await this.pingPong()
 
-      if (!pong.success) {
-        this.elementRef.textContent = ''
+        if (!pong.success) {
+          this.elementRef.textContent = ''
 
-        retryCount++
+          retryCount++
 
-        return this.checkIfNumberIsAvailable(retryCount)
-      }
-    }, 10_000)
+          return this.checkIfNumberIsAvailable(retryCount)
+        }
+      }, 10_000)
+    }
   }
 
   async notifyCallTrackingCheckout() {
