@@ -91,24 +91,10 @@ class CallTrackingComponent extends HTMLElement {
 
     await this.checkin.send(this.checkinSendProps)
 
-    // let pong = await this.pingPong()
-
-    // if (pong.response?.type == 'no_lock') {
-    //   retryCount++
-    //   await delay(1_000)
-
-    //   return this.checkIfNumberIsAvailable(retryCount)
-    // }
-
-    // if (pong.response?.type == 'no_pings') {
-    //   await delay(1_000)
-
-    //   await this.notifyCallTrackingCheckout()
-
-    //   retryCount = 0
-
-    //   return this.checkIfNumberIsAvailable(retryCount)
-    // }
+    if (this.checkin.result.type == 'duplicated') {
+      retryCount++
+      return this.checkIfNumberIsAvailable(retryCount)
+    }
 
     this.elementRef.textContent = this.checkin.result.number
     retryCount = 0
