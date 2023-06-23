@@ -110,7 +110,7 @@ class CallTrackingComponent extends HTMLElement {
 
           return this.checkIfNumberIsAvailable(retryCount)
         }
-      }, 10_000)
+      }, 20_000)
     }
   }
 
